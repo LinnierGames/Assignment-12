@@ -100,9 +100,9 @@ int main()
 	size = list4.size();
 	cout << "List 4: ";
 
-	const LL<int> list5( list4 );
+	LL<int> list5;
 
-	for ( LL<int>::iterator i = list4.begin() ; i != list4.end(); i++ )
+	for ( LL<int>::iterator i = list4.begin() ; i != list4.end(); ++i )
 	{
 		cout << i->data << ", ";
 	}
@@ -112,6 +112,17 @@ int main()
 	//list5 = list4;
 
 	cout << "List 5 size: " << list5.size() << endl;
+
+	cout << "List 5: pop front" << endl;
+
+	try
+	{
+		list5.pop_front();
+	}
+	catch ( LL<int>::Empty_List_Error e )
+	{
+		cout << "OHHH NOOESS" << endl;
+	}
 
 	return 0;
 }

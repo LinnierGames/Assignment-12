@@ -1,3 +1,16 @@
+//***************************************************************************//
+/*
+Assignment 12
+
+Benjamin Hough
+CS11 sect: 0445
+Nov 15, 2015
+Dave Harden
+LL.h
+
+*/
+//***************************************************************************//
+
 
 #ifndef LL_hpp
 #define LL_hpp
@@ -13,9 +26,10 @@ namespace cs11_linkedlist
 		typedef T value_type;
 
 		LL();
-		LL( const LL& listToCopy );
-		LL operator=( const LL & listToAssign );
+		LL( const LL & listToCopy );
 		~LL();
+
+		LL operator=( const LL & listToAssign );	
 		bool empty() const;
 		size_type size() const;
 		void clear();
@@ -24,29 +38,29 @@ namespace cs11_linkedlist
 		value_type & front();
 		const value_type & front() const;
 
+		class Empty_List_Error {};
+
 	private:
 		struct node
 		{
 			value_type data;
 			node* next;
 		};
+
 		node* list;
 
 		void copyList( const LL & listToCopy );
-		node * last();
-		const node * last() const;
-
 
 	public:
 		class iterator
 		{
 		public:
-			iterator( node* initial = nullptr )
+			iterator( node * initial = nullptr )
 			{
 				current = initial;
 			}
 
-			node& operator*() const
+			node & operator*() const
 			{
 				return *current;
 			}
@@ -56,7 +70,7 @@ namespace cs11_linkedlist
 				return current;
 			}
 
-			iterator& operator++()
+			iterator & operator++()
 			{
 				current = current -> next;
 				return *this;
@@ -74,12 +88,12 @@ namespace cs11_linkedlist
 				return current == other.current;
 			}
 
-			bool operator !=( iterator other ) const
+			bool operator!=( iterator other ) const
 			{
 				return current != other.current;
 			}
 		private:
-			node* current;
+			node * current;
 		};
 
 		class const_iterator
@@ -90,7 +104,7 @@ namespace cs11_linkedlist
 				current = initial;
 			}
 
-			const node& operator*() const
+			const node & operator*() const
 			{
 				return *current;
 			}
@@ -100,7 +114,7 @@ namespace cs11_linkedlist
 				return current;
 			}
 
-			const_iterator& operator++()
+			const_iterator & operator++()
 			{
 				current = current->next;
 				return *this;
@@ -123,7 +137,7 @@ namespace cs11_linkedlist
 				return current != other.current;
 			}
 		private:
-			const node* current;
+			const node * current;
 		};
 
 		iterator begin()
@@ -133,7 +147,7 @@ namespace cs11_linkedlist
 
 		iterator end()
 		{
-			return iterator( last() + 1 );
+			return iterator( nullptr );
 		}
 
 		const_iterator begin() const
@@ -143,7 +157,7 @@ namespace cs11_linkedlist
 
 		const_iterator end() const
 		{
-			return const_iterator( last() + 1 );
+			return const_iterator( nullptr );
 		}
 	};		
 }
@@ -151,4 +165,4 @@ namespace cs11_linkedlist
 
 #include "LL.cpp"
 
-#endif /* LL_hpp */
+#endif LL_hpp
